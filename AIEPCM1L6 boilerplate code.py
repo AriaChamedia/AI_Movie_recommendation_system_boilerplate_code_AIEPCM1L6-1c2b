@@ -51,8 +51,18 @@ def handle_ai(name):
     print(Fore.BLUE + "\n🔍 Let's find the perfect movie for you!\n")
     # Show genres in a single line
     print(Fore.GREEN + "Available Genres: ", end="")
-    print("The genres avalible are: 1.Comedy")
+    print("The genres avalible are: 1.History")
     print(" 2.Action")
+    print(" 3.Drama")
+    print(" 4.Romance")
+    print(" 5.Crime")
+    print(" 6.Documentary")
+    print(" 7.Fantasy")
+    print(" 8.Sci-Fi")
+    print(" 9.Family")
+    print(" 10.Mystery")
+    print(" 11.Adventure")
+    
     genre= input("Enter your choice").strip()
     mood = input(Fore.YELLOW + "How do you feel today? (Describe your mood): ").strip()
     print(Fore.BLUE + "\nAnalyzing mood", end="", flush=True)
@@ -60,8 +70,8 @@ def handle_ai(name):
     
     mood_desc = "positive 😊" if polarity > 0 else "negative 😞" if polarity < 0 else "neutral 😐"
     print(f"\n{Fore.GREEN}Your mood is {mood_desc} (Polarity: {polarity:.2f}).\n")
-    rating_input = float(input(Fore.YELLOW + "Enter minimum IMDB rating (7.6-9.3) or 'skip': "))
-    print(f"{Fore.BLUE}\nFinding movies for {name}", end="")
+    rating_input = float(input(Fore.YELLOW + "Enter minimum IMDB rating (7.6-9.3) or '0'if you don't want to enter a rating: "))
+    print(f"{Fore.BLUE}\nFinding movies for {name}", end=" ")
     recs = recommend_movies(genre=genre, mood=mood, rating=rating_input, top_n=5)
     print(recs)
    
@@ -74,3 +84,16 @@ if __name__=="__main__":
 
     print(f"\n{Fore.GREEN}Great to meet you, {name}!\n")
     handle_ai(name)
+    
+    
+another=input(f"{Fore.MAGENTA} would you like another recommendation based on your preferences? (yes/no): ").strip().lower()  
+if another == "yes":
+    # Ask for preferences again or reuse previous ones as needed
+    genre = input("Enter your preferred genre: ").strip()
+    mood = input("How do you feel today? (Describe your mood): ").strip()
+    rating_input = float(input("Enter minimum IMDB rating (7.6-9.3) or '0' if you don't want to enter a rating: "))
+    rec = recommend_movies(genre=genre, mood=mood, rating=rating_input, top_n=1)
+    print(rec)  
+    
+else:
+    print(f"{Fore.GREEN}Thank you for using the Movie Reccommendation AI assistant {name}!")    
