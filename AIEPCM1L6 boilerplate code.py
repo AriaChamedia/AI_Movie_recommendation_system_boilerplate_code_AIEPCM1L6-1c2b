@@ -29,10 +29,15 @@ cosine_sim = cosine_similarity(tfidf_matrix, tfidf_matrix)
 
 def recommend_movies(genre=None, mood=None, rating=None, top_n=5 ):
     filtered_df=movies_df
+    print(filtered_df.head())
     if genre:
         filtered_df = filtered_df[filtered_df['Genre'].str.contains(genre, case=False, na=False)]
+        print(f"Based on genre, {genre} " )
+        print(filtered_df)
     if rating:
         filtered_df = filtered_df[filtered_df['IMDB_Rating'] >= rating]
+        print(f"The rating is {rating} ")
+        print(filtered_df)
     recommendations=[]
     for idx, row in filtered_df.iterrows():
         overview = row['Overview']
